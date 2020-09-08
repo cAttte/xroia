@@ -9,7 +9,8 @@
     "dependencies": {
         "import-jsx": "^4.0.0",
         "ink": "^3.0.5",
-        "ink-box": "^1.0.0",
+        "ink-gradient": "^2.0.0",
+        "keypress": "^0.2.1",
         "react": "^16.13.1"
     },
     "devDependencies": {
