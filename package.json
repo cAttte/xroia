@@ -1,0 +1,26 @@
+{
+    "name": "xroia",
+    "version": "0.0.0",
+    "license": "MIT",
+    "bin": "src/index.js",
+    "engines": {
+        "node": ">=10"
+    },
+    "dependencies": {
+        "import-jsx": "^4.0.0",
+        "ink": "^3.0.5",
+        "ink-box": "^1.0.0",
+        "react": "^16.13.1"
+    },
+    "devDependencies": {
+        "@babel/preset-env": "^7.11.5",
+        "@babel/preset-react": "^7.10.4",
+        "@babel/register": "^7.11.5"
+    },
+    "babel": {
+        "presets": [
+            "@babel/preset-env",
+            "@babel/preset-react"
+        ]
+    }
+}
