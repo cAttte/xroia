@@ -2,7 +2,10 @@
     "name": "xroia",
     "version": "0.0.0",
     "license": "MIT",
-    "bin": "src/index.js",
+    "bin": {
+        "xroia": "src/index.js",
+        "xr": "src/index.js"
+    },
     "engines": {
         "node": ">=10"
     },
