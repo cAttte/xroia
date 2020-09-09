@@ -10,11 +10,13 @@
         "node": ">=10"
     },
     "dependencies": {
+        "color-blend": "^3.0.0",
         "import-jsx": "^4.0.0",
         "ink": "^3.0.5",
         "ink-gradient": "^2.0.0",
         "keypress": "^0.2.1",
-        "react": "^16.13.1"
+        "react": "^16.13.1",
+        "tinygradient": "^1.1.2"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.11.5",
