@@ -18,7 +18,7 @@ module.exports = class App extends React.Component {
         this.hueRef = React.createRef()
         this.state = {
             color: { h: 0, s: 100, l: 50 },
-            focus: this.hueRef,
+            focus: "hue",
             terminalWidth: process.stdout.columns,
             terminalHeight: process.stdout.rows,
             isMinSize: (process.stdout.columns / 100) * 50 >= Logo.getWidth() + 8
