@@ -2,6 +2,12 @@
 
 Command-line color picker.
 
+## Table of Contents
+
+-   [Installation](#installation)
+-   [Usage](#usage)
+-   [Xroia?](#xroia-1)
+
 ## Installation
 
 ```
@@ -30,7 +36,7 @@ Xroia also exposes an alias with a shorter name for convenience, **xr**:
 $ xr
 ```
 
-## xroia?
+## Xroia?
 
 _Χροιά_ ([/xria/][greek ipa]) is a Greek word meaning _complexion_ or _hue_.
 **Xroia** is _χροιά_ represented in [Beta Code][beta code].
