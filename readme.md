@@ -7,6 +7,7 @@ Command-line color picker.
 -   [Installation](#installation)
 -   [Usage](#usage)
 -   [Xroia?](#xroia-1)
+-   [License](#license)
 
 ## Installation
 
@@ -40,6 +41,10 @@ $ xr
 
 _Χροιά_ ([/xria/][greek ipa]) is a Greek word meaning _complexion_ or _hue_.
 **Xroia** is _χροιά_ represented in [Beta Code][beta code].
+
+## License
+
+Xroia uses the [MIT License](https://github.com/cAttte/xroia/blob/master/license).
 
 <!-- references -->
 
