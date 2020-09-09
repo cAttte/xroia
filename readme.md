@@ -2,7 +2,33 @@
 
 Command-line color picker.
 
-<!-- more stuff goes here... -->
+## Installation
+
+```
+$ npm install --global cAttte/xroia
+```
+
+or for development:
+
+```
+$ git clone https://github.com/cAttte/xroia.git
+$ cd xroia
+$ npm install --global .
+```
+
+## Usage
+
+To start the app, simply run the command:
+
+```
+$ xroia
+```
+
+Xroia also exposes an alias with a shorter name for convenience, **xr**:
+
+```
+$ xr
+```
 
 ## xroia?
 
