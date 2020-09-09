@@ -1,16 +1,8 @@
-const chalk = require("chalk")
 const gradient = require("tinygradient")
 const blend = require("color-blend").normal
 const React = require("react")
 const Ink = require("ink")
-
-const FULL = "█"
-const EMPTY = " "
-const FIRST_HALF = "▌"
-const SECOND_HALF = "▐"
-
-const hues = [0, 60, 120, 180, 240, 300, 360]
-const HUE_GRADIENT = gradient(hues.map(h => `hsl(${h}, 100%, 50%)`))
+const subpixel = require("../util/subpixel")
 
 module.exports = class HueController extends React.Component {
     constructor(props) {
@@ -32,31 +24,33 @@ module.exports = class HueController extends React.Component {
     renderSlider() {
         const sliderWidth = this.props.width - 4
         const percentageHue = this.props.color.h / (360 / 100) / 100
-        const position = percentageHue * sliderWidth - 1
-        const index = Math.max(Math.floor(position), 0)
-        const roundedPosition = Math.floor(position * 2) / 2 // round to nearest .5
-        const cursor = roundedPosition - index === 0.5 ? SECOND_HALF : FIRST_HALF
+        let cursorPosition = Math.floor(percentageHue * (sliderWidth * 2))
+        if (cursorPosition === sliderWidth * 2) cursorPosition--
 
-        let characters = FULL.repeat(sliderWidth).split("")
-        characters[index] = cursor
+        let white
+        const hues = [0, 60, 120, 180, 240, 300, 360]
+        const hueGradient = gradient(hues.map(h => `hsl(${h}, 100%, 50%)`))
+        const colors = hueGradient.rgb(sliderWidth * 2)
 
-        const colors = HUE_GRADIENT.rgb(characters.length)
-        let blendedWhite = chalk.rgb(250, 250, 250)
-        const slider = characters
-            .map((char, i) => {
-                const { r, g, b } = colors[i].toRgb()
-                if (char === cursor) {
-                    const white = { r: 250, g: 250, b: 250, a: 0.8 }
-                    const b = blend(white, { r, g, b, a: 0.2 })
-                    blendedWhite = chalk.rgb(b.r, b.g, b.b)
-                    return blendedWhite.bgRgb(r, g, b)(char)
-                } else {
-                    return chalk.rgb(r, g, b)(char)
-                }
-            })
-            .join("")
+        const sliderCharacters = []
+        for (let i = 0; i < colors.length; i++) {
+            const firstRGB = colors[i].toRgb()
+            const secondRGB = (colors[i + 1] || colors[i]).toRgb()
 
-        const marker = EMPTY.repeat(index) + blendedWhite(cursor)
+            if (i === cursorPosition) {
+                white = blend({ r: 250, g: 250, b: 250, a: 0.8 }, { ...firstRGB, a: 0.2 })
+                if (i % 2 === 0) sliderCharacters.push(subpixel(white, secondRGB, "HOR"))
+                else sliderCharacters.splice(-1, 1, subpixel(white, firstRGB, "HOR_REV"))
+            } else if (i % 2 === 0) {
+                sliderCharacters.push(subpixel(firstRGB, secondRGB))
+            }
+        }
+
+        const slider = sliderCharacters.join("")
+        const marker =
+            " ".repeat(cursorPosition / 2) +
+            subpixel(white, null, cursorPosition % 2 === 0 ? "HOR" : "HOR_REV")
+
         return [marker, slider, marker].join("\n")
     }
 
