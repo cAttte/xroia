@@ -15,14 +15,14 @@ process.on("exit", () => keypress.disableMouse(process.stdout))
 module.exports = class App extends React.Component {
     constructor(props) {
         super(props)
+        this.hueRef = React.createRef()
         this.state = {
-            color: [0, 100, 50],
-            focus: "hue",
+            color: { h: 0, s: 100, l: 50 },
+            focus: this.hueRef,
             terminalWidth: process.stdout.columns,
             terminalHeight: process.stdout.rows,
             isMinSize: (process.stdout.columns / 100) * 50 >= Logo.getWidth() + 8
         }
-        this.hueControllerRef = React.createRef()
     }
 
     componentDidMount() {
@@ -36,11 +36,15 @@ module.exports = class App extends React.Component {
     }
 
     render() {
+        const contentWidth = Math.max(this.state.terminalWidth / 2 - 8, 0)
+        const { h, s, l } = this.state.color
+        const colorString = `hsl(${h}, ${s}, ${l})`
+
         return (
             <Ink.Box
                 flexDirection="column"
                 borderStyle="round"
-                borderColor={`hsl(${this.state.color.join(",")})`}
+                borderColor={colorString}
                 paddingX={3}
                 paddingY={1}
                 width="50%"
@@ -49,15 +53,15 @@ module.exports = class App extends React.Component {
                     <>
                         <Logo />
                         <HueController
-                            ref={this.hueControllerRef}
+                            ref={this.hueRef}
                             focused={this.state.focus === "hue"}
-                            width={Math.max(this.state.terminalWidth / 2 - 8, 0)}
-                            hue={this.state.color[0]}
-                            setHSL={this.setHSL.bind(this)}
+                            width={contentWidth}
+                            color={this.state.color}
+                            setColor={this.setColor.bind(this)}
                         />
                         <Ink.Text>
                             <Ink.Newline />
-                            hsl({this.state.color.join(", ")})
+                            {colorString}
                         </Ink.Text>
                     </>
                 ) : (
@@ -67,9 +71,8 @@ module.exports = class App extends React.Component {
         )
     }
 
-    setHSL(h = this.state.color[0], s = this.state.color[1], l = this.state.color[2]) {
-        if (!this.state.isMinSize) return
-        this.setState({ color: [h, s, l] })
+    setColor(h = this.state.color.h, s = this.state.color.s, l = this.state.color.l) {
+        this.setState({ color: { h, s, l } })
     }
 
     handleResize() {
@@ -84,7 +87,6 @@ module.exports = class App extends React.Component {
         if (!this.state.isMinSize) return
 
         if (key && key.ctrl && key.name === "c") process.stdin.pause()
-        if (this.state.focus === "hue")
-            this.hueControllerRef.current.handleKeypress(char, key)
+        if (this.state.focus === "hue") this.hueRef.current.handleKeypress(char, key)
     }
 }
