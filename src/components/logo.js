@@ -22,4 +22,10 @@ module.exports = class Logo extends React.Component {
             </Gradient>
         )
     }
+
+    static getWidth() {
+        let width = 0
+        for (const line of logo.split("\n")) if (line.length > width) width = line.length
+        return width
+    }
 }
