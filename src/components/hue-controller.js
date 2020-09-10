@@ -10,6 +10,14 @@ module.exports = class HueController extends React.Component {
         super(props)
     }
 
+    componentDidMount() {
+        process.stdin.on("keypress", this.handleKeypress.bind(this))
+    }
+
+    componentWillUnmount() {
+        process.stdin.off("keypress", this.handleKeypress.bind(this))
+    }
+
     render() {
         const props = this.props.focused
             ? { paddingX: 1, borderStyle: "round" }
@@ -56,6 +64,8 @@ module.exports = class HueController extends React.Component {
     }
 
     handleKeypress(_, key) {
+        if (!this.props.focused) return
+
         let step = 1
         if (key.ctrl) step += 5
         if (key.shift) step += 15
