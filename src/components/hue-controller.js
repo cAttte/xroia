@@ -22,7 +22,7 @@ module.exports = class HueController extends React.Component {
     }
 
     renderSlider() {
-        const sliderWidth = this.props.width - 4
+        const sliderWidth = Math.floor(this.props.width - 4)
         const percentageHue = this.props.color.h / (360 / 100) / 100
         let cursorPosition = Math.floor(percentageHue * (sliderWidth * 2))
         if (cursorPosition === sliderWidth * 2) cursorPosition--
