@@ -6,10 +6,7 @@
         "xroia": "src/index.js",
         "xr": "src/index.js"
     },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/cAttte/xroia.git"
-    },
+    "repository": "cAttte/xroia",
     "engines": {
         "node": ">=10"
     },
