@@ -3,6 +3,7 @@ const blend = require("color-blend").normal
 const React = require("react")
 const Ink = require("ink")
 const subpixel = require("../util/subpixel")
+const space = require("../util/space")
 
 module.exports = class HueController extends React.Component {
     constructor(props) {
@@ -48,7 +49,7 @@ module.exports = class HueController extends React.Component {
 
         const slider = sliderCharacters.join("")
         const marker =
-            " ".repeat(cursorPosition / 2) +
+            space(cursorPosition / 2) +
             subpixel(white, null, cursorPosition % 2 === 0 ? "HOR" : "HOR_REV")
 
         return [marker, slider, marker].join("\n")
