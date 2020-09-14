@@ -37,6 +37,8 @@ module.exports = class ColorPicker extends React.Component {
                 />
                 <Ink.Box marginTop={1}>
                     <Ink.Text>{colorString}</Ink.Text>
+                    <Ink.Box flexGrow={1} />
+                    <Ink.Text>{this.props.detail}</Ink.Text>
                 </Ink.Box>
             </Ink.Box>
         )
