@@ -2,8 +2,8 @@ const importJSX = require("import-jsx")
 const React = require("react")
 const Ink = require("ink")
 
-const Logo = importJSX("./logo")
-const HueController = importJSX("./hue-controller")
+const Logo = importJSX("./Logo")
+const HueController = importJSX("./HueController")
 
 module.exports = class ColorPicker extends React.Component {
     constructor(props) {

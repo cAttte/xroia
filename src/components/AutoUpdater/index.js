@@ -1,4 +1,4 @@
-const xroia = require("../../package.json")
+const xroia = require("../../../package.json")
 const React = require("react")
 const Ink = require("ink")
 

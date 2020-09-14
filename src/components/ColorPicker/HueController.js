@@ -2,8 +2,8 @@ const gradient = require("tinygradient")
 const blend = require("color-blend").normal
 const React = require("react")
 const Ink = require("ink")
-const subpixel = require("../util/subpixel")
-const space = require("../util/space")
+const subpixel = require("../../util/subpixel")
+const space = require("../../util/space")
 
 module.exports = class HueController extends React.Component {
     constructor(props) {
