@@ -15,6 +15,7 @@
         "color-blend": "^3.0.0",
         "import-jsx": "^4.0.0",
         "ink": "^3.0.5",
+        "ink-focus": "^1.0.1",
         "keypress": "^0.2.1",
         "node-fetch": "^2.6.1",
         "react": "^16.13.1",

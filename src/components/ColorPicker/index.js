@@ -2,6 +2,7 @@ const importJSX = require("import-jsx")
 const React = require("react")
 const Ink = require("ink")
 
+const { FocusManager } = require("ink-focus")
 const Logo = importJSX("./Logo")
 const HueController = importJSX("./HueController")
 
@@ -29,12 +30,14 @@ module.exports = class ColorPicker extends React.Component {
                 width="50%"
             >
                 <Logo color={this.state.color} />
-                <HueController
-                    focused={this.state.focus === "hue"}
-                    width={contentWidth}
-                    color={this.state.color}
-                    setColor={this.setColor.bind(this)}
-                />
+                <FocusManager tab flexDirection="column">
+                    <HueController
+                        pointer={1}
+                        width={contentWidth}
+                        color={this.state.color}
+                        setColor={this.setColor.bind(this)}
+                    />
+                </FocusManager>
                 <Ink.Box marginTop={1}>
                     <Ink.Text>{colorString}</Ink.Text>
                     <Ink.Box flexGrow={1} />
