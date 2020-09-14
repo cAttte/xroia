@@ -1,4 +1,3 @@
-const keypress = require("keypress")
 const importJSX = require("import-jsx")
 const React = require("react")
 
@@ -7,10 +6,6 @@ const ColorPicker = importJSX("./ColorPicker")
 const SizeWarning = importJSX("./SizeWarning")
 const AutoUpdater = importJSX("./AutoUpdater")
 const Logo = importJSX("./ColorPicker/Logo")
-
-keypress(process.stdin)
-process.stdin.setRawMode(true)
-process.stdin.resume()
 
 module.exports = class App extends React.Component {
     constructor(props) {
@@ -53,10 +48,6 @@ module.exports = class App extends React.Component {
         const isMinSize = (process.stdout.columns / 100) * 50 >= Logo.getWidth() + 8
         if (!isMinSize) this.setState({ window: "size-warning" })
         else this.setState({ window: "color-picker" })
-    }
-
-    handleKeypress(_, key) {
-        if (key && key.ctrl && key.name === "c") process.stdin.pause()
     }
 
     handleUpdateCheck(update) {
