@@ -28,17 +28,16 @@ module.exports = class ColorPicker extends React.Component {
                 paddingY={1}
                 width="50%"
             >
-                <Logo />
+                <Logo color={this.state.color} />
                 <HueController
                     focused={this.state.focus === "hue"}
                     width={contentWidth}
                     color={this.state.color}
                     setColor={this.setColor.bind(this)}
                 />
-                <Ink.Text>
-                    <Ink.Newline />
-                    {colorString}
-                </Ink.Text>
+                <Ink.Box marginTop={1}>
+                    <Ink.Text>{colorString}</Ink.Text>
+                </Ink.Box>
             </Ink.Box>
         )
     }
