@@ -21,7 +21,7 @@ module.exports = class HueController extends React.Component {
     render() {
         const props = this.props.focused
             ? { paddingX: 1, borderStyle: "round" }
-            : { marginX: 1 } // take up space border would take
+            : { paddingX: 1, margin: 1, borderStyle: null }
 
         return (
             <Ink.Box {...props}>
