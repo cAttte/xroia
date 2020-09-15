@@ -32,7 +32,6 @@ module.exports = class ColorPicker extends React.Component {
                 <Logo color={this.state.color} />
                 <FocusManager tab flexDirection="column">
                     <HueController
-                        pointer={1}
                         width={contentWidth}
                         color={this.state.color}
                         setColor={this.setColor.bind(this)}
