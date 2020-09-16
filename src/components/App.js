@@ -17,13 +17,11 @@ module.exports = class App extends React.Component {
 
     componentDidMount() {
         process.stdout.on("resize", this.handleResize.bind(this))
-        process.stdin.on("keypress", this.handleKeypress.bind(this))
         this.updateCheck = checkUpdates().then(this.handleUpdateCheck.bind(this))
     }
 
     componentWillUnmount() {
         process.stdout.off("resize", this.handleResize.bind(this))
-        process.stdin.off("keypress", this.handleKeypress.bind(this))
         this.updateCheck.cancel()
     }
 
@@ -44,8 +42,9 @@ module.exports = class App extends React.Component {
     }
 
     handleResize() {
-        if (this.state.window !== "color-picker") return
+        if (!["color-picker", "size-warning"].includes(this.state.window)) return
         const isMinSize = (process.stdout.columns / 100) * 50 >= Logo.getWidth() + 8
+
         if (!isMinSize) this.setState({ window: "size-warning" })
         else this.setState({ window: "color-picker" })
     }
