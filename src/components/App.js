@@ -11,7 +11,7 @@ module.exports = class App extends React.Component {
     constructor(props) {
         super(props)
         const isMinSize = (process.stdout.columns / 100) * 50 >= Logo.getWidth() + 8
-        const window = isMinSize ? "color-picker" : "size-warning"
+        const window = isMinSize ? "ColorPicker" : "SizeWarning"
         this.state = { window, detail: "Checking for updates..." }
     }
 
@@ -32,9 +32,9 @@ module.exports = class App extends React.Component {
             setWindow: this.setWindow.bind(this)
         }
 
-        if (this.state.window === "color-picker") return <ColorPicker {...props} />
-        else if (this.state.window === "auto-updater") return <AutoUpdater {...props} />
-        else if (this.state.window === "size-warning") return <SizeWarning />
+        const windowComponents = { ColorPicker, AutoUpdater, SizeWarning }
+        const WindowComponent = windowComponents[this.state.window]
+        return <WindowComponent {...props} />
     }
 
     setWindow(window) {
@@ -42,15 +42,15 @@ module.exports = class App extends React.Component {
     }
 
     handleResize() {
-        if (!["color-picker", "size-warning"].includes(this.state.window)) return
+        if (!["ColorPicker", "SizeWarning"].includes(this.state.window)) return
         const isMinSize = (process.stdout.columns / 100) * 50 >= Logo.getWidth() + 8
 
-        if (!isMinSize) this.setState({ window: "size-warning" })
-        else this.setState({ window: "color-picker" })
+        if (!isMinSize) this.setState({ window: "SizeWarning" })
+        else this.setState({ window: "ColorPicker" })
     }
 
     handleUpdateCheck(update) {
         if (update.latest) this.setState({ detail: "v" + update.cur })
-        else this.setState({ update: update.new, window: "auto-updater" })
+        else this.setState({ update: update.new, window: "AutoUpdater" })
     }
 }

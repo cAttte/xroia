@@ -49,7 +49,7 @@ module.exports = class AutoUpdater extends React.Component {
                     <Ink.Text bold>npm i -g {xroia.repository}</Ink.Text>
                 </Ink.Text>
             )
-        else if (this.state.status === "done") this.props.setWindow("color-picker")
+        else if (this.state.status === "done") this.props.setWindow("ColorPicker")
         return (
             <Ink.Box
                 flexDirection="column"
@@ -72,7 +72,7 @@ module.exports = class AutoUpdater extends React.Component {
     }
 
     finish() {
-        this.props.setWindow("color-picker")
+        this.props.setWindow("ColorPicker")
     }
 
     handleKeypress(_, key) {
